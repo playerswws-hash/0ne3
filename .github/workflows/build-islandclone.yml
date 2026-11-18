@@ -2,6 +2,8 @@ name: Build IslandClone
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   build:
@@ -13,11 +15,10 @@ jobs:
         uses: Randomblock1/theos-action@v1
 
       - name: Build
-        working-directory: IslandClone
         run: make package FINALPACKAGE=1
 
       - name: Upload deb
         uses: actions/upload-artifact@v4
         with:
           name: IslandClone-deb
-          path: IslandClone/packages/*.deb
+          path: packages/*.deb
